@@ -1,5 +1,6 @@
 require_relative 'shell/version'
 require_relative 'shell/loader'
+require_relative 'shell/ext/signature'
 require_relative 'shell/doc_manager'
 module Alf
   module Shell

@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version = $version
   s.summary = "Bring Alf's relational algebra to the shell"
   s.description = "This project implements the `alf` commandline tool."
-  s.homepage = "http://github.com/blambeau/alf-shell"
+  s.homepage = "http://github.com/alf-tool/alf-shell"
   s.authors = ["Bernard Lambeau"]
   s.email  = ["blambeau at gmail.com"]
   s.require_paths = ['lib']
