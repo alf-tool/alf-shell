@@ -4,6 +4,14 @@ require "rspec"
 
 module Helpers
 
+  def examples_database(&bl)
+    Alf.examples
+  end
+
+  def suppliers
+    Alf::Algebra.named_operand(:suppliers, examples_database)
+  end
+
 end
 
 RSpec.configure do |c|

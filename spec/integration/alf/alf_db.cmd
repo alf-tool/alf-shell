@@ -1,0 +1,1 @@
+alf --db=$(_("alf",__FILE__)) show --text rel

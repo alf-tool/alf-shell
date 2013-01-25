@@ -1,12 +1,11 @@
 GIT
   remote: git://github.com/alf-tool/alf-core.git
-  revision: c9102c57f38b18821670ad0f5e1b73f212db908c
+  revision: 31dbddeb8a3b98b10ba9687617094a56a4b6ff3f
   specs:
     alf-core (0.13.0)
       domain (~> 1.0.0.rc4)
       myrrha (~> 3.0.0.rc7)
       path (~> 1.3)
-      quickl (~> 0.4.3)
       sexpr (~> 0.5.1)
 
 GEM
