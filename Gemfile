@@ -8,7 +8,7 @@ end
 
 group :development do
   gem "rake", "~> 10.0"
-  gem "rspec", "~> 2.12"
+  gem "rspec", "~> 2.13"
 end
 
 group :extra do
