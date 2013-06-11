@@ -8,10 +8,10 @@ module AlfLauncher
   def self.load
     begin
       $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib) 
-      require "alf"
+      require "alf-shell"
     rescue LoadError => ex
       require "rubygems"
-      require "alf"
+      require "alf-shell"
     end
   end
   

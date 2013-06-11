@@ -3,7 +3,12 @@ module Alf
     class Exec < Shell::Command()
 
       def execute(args)
-        Reader.alf(args.first || $stdin, database)
+        cmd = if f = args.first
+          Path(f).read
+        else
+          $stdin.read
+        end
+        database.query(cmd)
       end
 
     end # class Exec
