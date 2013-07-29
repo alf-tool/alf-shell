@@ -4,6 +4,7 @@ CHANGELOG.md
 Gemfile
 Gemfile.lock
 bin/**/*
+doc/**/*
 lib/**/*
 LICENCE.md
 Manifest.txt
