@@ -3,6 +3,7 @@ shell.noespec
 CHANGELOG.md
 Gemfile
 Gemfile.lock
+bin/**/*
 lib/**/*
 LICENCE.md
 Manifest.txt

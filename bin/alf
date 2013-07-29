@@ -1,18 +1,8 @@
 #!/usr/bin/env ruby
 module AlfLauncher
 
-  def self.lib
-    File.expand_path('../../lib', __FILE__)
-  end
-  
   def self.load
-    begin
-      $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib) 
-      require "alf-shell"
-    rescue LoadError => ex
-      require "rubygems"
-      require "alf-shell"
-    end
+    require "alf-shell"
   end
   
   def self.start(argv)
