@@ -1,3 +1,7 @@
+# 0.14.0 / FIX ME
+
+* Added documentation for `page` (follows alf-core changes)
+
 # 0.13.1 / 2013-07-29
 
 * Embed the documentation so as to --help to work.

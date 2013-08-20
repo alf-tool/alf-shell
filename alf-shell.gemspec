@@ -20,6 +20,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rake", "~> 10.1")
   s.add_development_dependency("rspec", "~> 2.14")
   s.add_development_dependency("highline", "~> 1.6")
-  s.add_dependency("alf-core", "~> 0.13.0")
+  s.add_dependency("alf-core", "~> 0.14.0")
   s.add_dependency("quickl", "~> 0.4.3")
 end
