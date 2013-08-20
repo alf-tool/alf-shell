@@ -15,6 +15,12 @@ module Alf
         Size.new(Integer(argv.first || 0))
       }
 
+      # ARGV -> Integer
+      c.coercion(Array, Integer){|argv,_|
+        throw :next_rule if argv.size > 1
+        Integer(argv.first || 0)
+      }
+
       # ARGV -> AttrName
       c.coercion(Array, AttrName){|argv,_|
         throw :next_rule if argv.size > 1

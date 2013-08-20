@@ -35,6 +35,7 @@ RELATIONAL OPERATORS
     matching         Relational matching (join + project back on left)
     minus            Relational minus (aka difference)
     not-matching     Relational not matching (inverse of matching)
+    page             Relational pagination (offset/limit yet sounder)
     project          Relational projection (clip + compact)
     rank             Relational ranking (explicit tuple positions)
     rename           Relational renaming (rename some attributes)
