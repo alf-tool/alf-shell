@@ -10,12 +10,6 @@ module Alf
           }
         end
 
-        @pretty = nil
-        opt.on("--[no-]pretty",
-               "Enable/disable pretty print best effort") do |val|
-          @pretty = val
-        end
-
         @ff = nil
         opt.on("--ff=FORMAT",
                "Specify the floating point format") do |val|
@@ -29,7 +23,6 @@ module Alf
         argv = parse_options(argv, :split)
 
         # Set options on the requester
-        requester.pretty = @pretty unless @pretty.nil?
         requester.rendering_options[:float_format] = @ff unless @ff.nil?
         requester.renderer_class = (@renderer_class || requester.renderer_class)
 

@@ -12,7 +12,6 @@ OPTIONS
     --yaml                       Render output in YAML
     --json                       Render output in JSON
     --csv                        Render output in CSV
-    --[no-]pretty                Enable/disable pretty print best effort
     --ff=FORMAT                  Specify the floating point format
 
 DESCRIPTION
