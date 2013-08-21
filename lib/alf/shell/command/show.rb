@@ -2,29 +2,10 @@ module Alf
   module Shell
     class Show < Shell::Command()
 
-      options do |opt|
-        @renderer_class = nil
-        Renderer.each do |name,descr,clazz|
-          opt.on("--#{name}", "Render output #{descr}"){
-            @renderer_class = clazz
-          }
-        end
-
-        @ff = nil
-        opt.on("--ff=FORMAT",
-               "Specify the floating point format") do |val|
-          @ff = val
-        end
-      end
-
       def run(argv, requester)
         # set requester and parse options
         @requester = requester
         argv = parse_options(argv, :split)
-
-        # Set options on the requester
-        requester.rendering_options[:float_format] = @ff unless @ff.nil?
-        requester.renderer_class = (@renderer_class || requester.renderer_class)
 
         compile(argv)
       end

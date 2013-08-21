@@ -1,1 +1,1 @@
-alf show suppliers --yaml -- sid asc
+alf --yaml show suppliers -- sid asc

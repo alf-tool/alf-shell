@@ -1,1 +1,1 @@
-alf --pretty show suppliers --rash
+alf --rash --pretty show suppliers

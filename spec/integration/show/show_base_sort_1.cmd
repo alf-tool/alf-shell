@@ -1,1 +1,1 @@
-alf show --text suppliers -- city asc sid asc
+alf --text show suppliers -- city asc sid asc

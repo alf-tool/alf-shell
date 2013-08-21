@@ -1,1 +1,1 @@
-alf show suppliers --rash
+alf --rash show suppliers

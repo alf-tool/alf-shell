@@ -63,7 +63,7 @@ module Alf
           @execute = true
         end
 
-        @renderer_class = nil
+        @renderer_class = $stdout.tty? ? Renderer::Text : Renderer::Rash
         Renderer.each do |name,descr,clazz|
           opt.on("--#{name}", "Render output #{descr}"){
             @renderer_class = clazz
@@ -98,6 +98,11 @@ module Alf
           require(value)
         end
 
+        opt.on("--ff=FORMAT",
+               "Specify the floating point format") do |val|
+          @rendering_options[:float_format] = val
+        end
+
         self.pretty = $stdout.tty? if self.respond_to?(:pretty=)
         opt.on("--[no-]pretty",
                "Enable/disable pretty print best effort") do |val|
@@ -113,6 +118,14 @@ module Alf
                               " (c) 2011-2013, Bernard Lambeau"
         end
       end # Alf's options
+
+      def pretty=(val)
+        @rendering_options[:pretty] = val
+        if val && (hl = highline)
+          @rendering_options[:trim_at] = hl.output_cols - 1
+        end
+        val
+      end
 
       def stdin_operand
         @stdin_operand || Reader.send(@input_reader, $stdin)
@@ -130,14 +143,6 @@ module Alf
         end
       end
 
-      def pretty=(val)
-        @rendering_options[:pretty] = val
-        if val && (hl = highline)
-          @rendering_options[:trim_at] = hl.output_cols - 1
-        end
-        val
-      end
-
     private
 
       def compile(argv)
@@ -151,7 +156,6 @@ module Alf
       end
 
       def render(operator, out = $stdout)
-        renderer_class = self.renderer_class || default_renderer_class
         renderer = renderer_class.new(operator, rendering_options)
         renderer.execute(out)
       end
@@ -161,10 +165,6 @@ module Alf
         HighLine.new($stdin, $stdout)
       rescue LoadError => ex
         nil
-      end
-
-      def default_renderer_class
-        $stdout.tty? ? Renderer::Text : Renderer::Rash
       end
 
     end # class Main

@@ -1,1 +1,1 @@
-alf --db=$(_("alf",__FILE__)) show --text rel
+alf --text --db=$(_("alf",__FILE__)) show rel
