@@ -54,14 +54,10 @@ module Alf
       # Rendering options
       attr_reader :rendering_options
 
-      # Creates a command instance
-      def initialize(db = Alf.connect(Path.pwd))
-        @database = db
-        @rendering_options = {}
-      end
-
       # Install options
       options do |opt|
+        @rendering_options = {}
+
         @execute = false
         opt.on("-e", "--execute", "Execute one line of script (Lispy API)") do
           @execute = true
@@ -78,6 +74,7 @@ module Alf
           @database = Alf.examples
         end
 
+        @database ||= Alf.connect(Path.pwd)
         opt.on('--db=DB',
                "Set the database to use") do |value|
           @database = Alf.connect(value)
