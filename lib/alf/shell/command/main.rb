@@ -98,6 +98,7 @@ module Alf
           require(value)
         end
 
+        self.pretty = $stdout.tty? if self.respond_to?(:pretty=)
         opt.on("--[no-]pretty",
                "Enable/disable pretty print best effort") do |val|
           self.pretty = val
@@ -132,8 +133,7 @@ module Alf
       def pretty=(val)
         @rendering_options[:pretty] = val
         if val && (hl = highline)
-          @rendering_options[:trim_at] = hl.output_cols
-          @rendering_options[:page_at] = hl.output_rows
+          @rendering_options[:trim_at] = hl.output_cols - 1
         end
         val
       end
