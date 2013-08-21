@@ -38,7 +38,7 @@ describe "Alf's alf command / " do
         begin 
           dir = Path.relative('__database__')
           main = Alf::Shell::Main.new
-          main.database = Alf.connect(dir)
+          main.connection = Alf.connect(dir)
           main.run(argv, __FILE__)
         rescue => ex
           begin

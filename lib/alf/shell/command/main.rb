@@ -43,7 +43,7 @@ module Alf
       end # class << self
 
       # Connection instance to use to get base relations
-      attr_accessor :database
+      attr_accessor :connection
 
       # The reader to use when stdin is used as operand
       attr_accessor :stdin_operand
@@ -71,13 +71,13 @@ module Alf
         end
 
         opt.on('--examples', "Use the example database for database") do
-          @database = Alf.examples
+          @connection = Alf.examples
         end
 
-        @database ||= Alf.connect(Path.pwd)
+        @connection ||= Alf.connect(Path.pwd)
         opt.on('--db=DB',
                "Set the database to use") do |value|
-          @database = Alf.connect(value)
+          @connection = Alf.connect(value)
         end
 
         @input_reader = :rash
@@ -142,10 +142,10 @@ module Alf
 
       def compile(argv)
         if @execute
-          database.query(argv.first)
+          connection.query(argv.first)
         else
           op = yield
-          op = op.bind(database) if op
+          op = op.bind(connection) if op
           op
         end
       end

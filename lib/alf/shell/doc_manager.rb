@@ -55,7 +55,7 @@ module Alf
         argv.inject(nil) do |cmd,arr|
           arr.shift if arr.first == "alf"
           main = Alf::Shell::Main.new
-          main.database = Alf.examples
+          main.connection = Alf.examples
           main.stdin_operand = cmd unless cmd.nil?
           main.run(arr, requester)
         end

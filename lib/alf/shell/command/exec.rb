@@ -8,7 +8,7 @@ module Alf
         else
           $stdin.read
         end
-        database.query(cmd)
+        connection.query(cmd)
       end
 
     end # class Exec
