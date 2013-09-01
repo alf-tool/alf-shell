@@ -30,13 +30,14 @@ OPTIONS
 RELATIONAL OPERATORS
 
     extend           Relational extension (additional, computed attributes)
+    frame            Relational framing (aka offset/limit, yet sounder)
     group            Relational grouping (relation-valued attributes)
     intersect        Relational intersection (aka a logical and)
     join             Relational join (and cartesian product)
     matching         Relational matching (join + project back on left)
     minus            Relational minus (aka difference)
     not-matching     Relational not matching (inverse of matching)
-    page             Relational pagination (offset/limit yet sounder)
+    page             Relational pagination (like frame, but easier)
     project          Relational projection (clip + compact)
     rank             Relational ranking (explicit tuple positions)
     rename           Relational renaming (rename some attributes)

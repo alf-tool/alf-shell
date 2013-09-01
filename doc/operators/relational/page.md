@@ -1,5 +1,5 @@
 
-Relational pagination (offset/limit yet sounder)
+Relational pagination (like frame, but easier)
 
 SYNOPSIS
 
