@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 group :runtime do
   gem "alf-core", :git => "git://github.com/alf-tool/alf-core.git"
   # gem "alf-core", :path => "../alf-core"
-  #gem "alf-core", "~> 0.14.0"
+  # gem "alf-core", "~> 0.14.0"
   gem "quickl", "~> 0.4.3"
 end
 
