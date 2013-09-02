@@ -140,7 +140,7 @@ module Alf
 
       def install_load_path
         config.load_paths.each do |path|
-          $:.append(path)
+          $: << path
         end
       end
 
@@ -169,9 +169,9 @@ module Alf
       end
 
       def rendering_options
-        options = { float_format: config.float_format,
-                    pretty: config.pretty? }
+        options = { float_format: config.float_format }
         if config.pretty? and (hl = highline)
+          options[:pretty]  = config.pretty?
           options[:trim_at] = hl.output_cols - 1
         end
         options
