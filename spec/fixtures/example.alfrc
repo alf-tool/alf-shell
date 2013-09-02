@@ -1,0 +1,13 @@
+alfrc do |c|
+
+  # Include the lib folder that is a brother of .alfrc
+  c.load_paths |= [
+    Path.dir/'lib'
+  ] 
+
+  # Require the 'alf-sequel'
+  c.requires |= [
+    'alf-sequel'
+  ]
+
+end

@@ -10,8 +10,13 @@ end
 
 describe "Alf's alf command / " do
 
-  Path.dir.glob('**/*.cmd').each do |input|
+  before do
+    Path.dir.chdir
+  end
+
+  Path.dir.glob('**/*.cmd').each_with_index do |input,index|
     cmd = wlang(input.readlines.first, binding)
+
     specify{ cmd.should =~ /^alf / }
   
     describe "#{input.basename}: #{cmd}" do
@@ -36,9 +41,7 @@ describe "Alf's alf command / " do
       
       specify{
         begin 
-          dir = Path.relative('__database__')
           main = Alf::Shell::Main.new
-          main.connection = Alf.connect(dir)
           main.run(argv, __FILE__)
         rescue => ex
           begin

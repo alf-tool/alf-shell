@@ -1,0 +1,3 @@
+alfrc do |c|
+  c.adapter = path/"../__database__"
+end

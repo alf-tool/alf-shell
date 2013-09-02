@@ -42,17 +42,14 @@ module Alf
 
       end # class << self
 
-      # Connection instance to use to get base relations
-      attr_accessor :connection
-
       # The reader to use when stdin is used as operand
       attr_accessor :stdin_operand
 
-      # Output renderer
-      attr_accessor :renderer_class
-
-      # Rendering options
-      attr_reader :rendering_options
+      # Creates a command instance
+      def initialize
+        @config = load_config
+      end
+      attr_reader :config
 
       # Install options
       options do |opt|
@@ -63,21 +60,19 @@ module Alf
           @execute = true
         end
 
-        @renderer_class = $stdout.tty? ? Renderer::Text : Renderer::Rash
         Renderer.each do |name,descr,clazz|
           opt.on("--#{name}", "Render output #{descr}"){
-            @renderer_class = clazz
+            config.default_renderer = clazz
           }
         end
 
         opt.on('--examples', "Use the example database for database") do
-          @connection = Alf.examples
+          config.adapter = Alf.examples_adapter
         end
 
-        @connection ||= Alf.connect(Path.pwd)
         opt.on('--db=DB',
                "Set the database to use") do |value|
-          @connection = Alf.connect(value)
+          config.adapter = value
         end
 
         @input_reader = :rash
@@ -90,23 +85,22 @@ module Alf
 
         opt.on("-Idirectory",
                "Specify $LOAD_PATH directory (may be used more than once)") do |val|
-          $LOAD_PATH.unshift val
+          config.load_paths << val
         end
 
         opt.on('-rlibrary',
-               "Require the library, before executing alf") do |value|
-          require(value)
+               "Require the library, before executing alf") do |val|
+          config.requires << val
         end
 
         opt.on("--ff=FORMAT",
                "Specify the floating point format") do |val|
-          @rendering_options[:float_format] = val
+          config.float_format = val
         end
 
-        self.pretty = $stdout.tty? if self.respond_to?(:pretty=)
         opt.on("--[no-]pretty",
                "Enable/disable pretty print best effort") do |val|
-          self.pretty = val
+          config.pretty = val
         end
 
         opt.on_tail('-h', "--help", "Show help") do
@@ -119,21 +113,20 @@ module Alf
         end
       end # Alf's options
 
-      def pretty=(val)
-        @rendering_options[:pretty] = val
-        if val && (hl = highline)
-          @rendering_options[:trim_at] = hl.output_cols - 1
-        end
-        val
-      end
-
       def stdin_operand
         @stdin_operand || Reader.send(@input_reader, $stdin)
       end
 
+      def connection
+        @connection ||= config.database.connection(viewpoint: config.viewpoint)
+      end
+
       def execute(argv)
+        install_load_path
+        install_requires
+
         # special case where a .alf file is provided
-        if argv.empty? or (argv.size == 1 && Path(argv.first).exist?)
+        if argv.empty? or (argv.size == 1 && Path(argv.first).file?)
           argv.unshift("exec")
         end
 
@@ -145,6 +138,26 @@ module Alf
 
     private
 
+      def install_load_path
+        config.load_paths.each do |path|
+          $:.append(path)
+        end
+      end
+
+      def install_requires
+        config.requires.each do |who|
+          require(who)
+        end
+      end
+
+      def load_config
+        config = Alf::Shell::DEFAULT_CONFIG.dup
+        if alfrc_file = Path.pwd.backfind('.alfrc')
+          config.alfrc(alfrc_file)
+        end
+        config
+      end
+
       def compile(argv)
         if @execute
           connection.query(argv.first)
@@ -155,8 +168,17 @@ module Alf
         end
       end
 
+      def rendering_options
+        options = { float_format: config.float_format,
+                    pretty: config.pretty? }
+        if config.pretty? and (hl = highline)
+          options[:trim_at] = hl.output_cols - 1
+        end
+        options
+      end
+
       def render(operator, out = $stdout)
-        renderer = renderer_class.new(operator, rendering_options)
+        renderer = config.default_renderer.new(operator, rendering_options)
         renderer.execute(out)
       end
 
@@ -164,7 +186,6 @@ module Alf
         require 'highline'
         HighLine.new($stdin, $stdout)
       rescue LoadError => ex
-        nil
       end
 
     end # class Main

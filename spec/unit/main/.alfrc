@@ -1,0 +1,4 @@
+alfrc do |c|
+  c.load_paths |= [ "a_load_path" ]
+  c.requires   |= [ "a_require"   ]
+end

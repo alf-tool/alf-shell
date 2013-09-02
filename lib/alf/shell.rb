@@ -1,12 +1,16 @@
 require_relative 'shell/version'
 require_relative 'shell/loader'
 require_relative 'shell/ext/signature'
+require_relative 'shell/alfrc'
 require_relative 'shell/doc_manager'
 module Alf
   module Shell
 
     # This is the main documentation extractor
     DOC_EXTRACTOR = DocManager.new
+
+    # This is the default configuration to be forked from
+    DEFAULT_CONFIG = Alfrc.new
 
     # Delegator command factory
     def self.Delegator()
