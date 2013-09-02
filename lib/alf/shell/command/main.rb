@@ -132,7 +132,7 @@ module Alf
 
         # compile the operator, render and returns it
         compile(argv){ super }.tap do |op|
-          render(op.to_cog) if op && requester
+          render(connection.compile(op)) if op && requester
         end
       end
 

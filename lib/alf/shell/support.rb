@@ -14,9 +14,10 @@ module Alf
         operands = [ stdin_operand ] + Array(argv)
         operands = operands[(operands.size - size)..-1] if size
         operands = operands.map{|arg|
-          arg = Algebra.named_operand(arg.to_sym, connection) if arg.is_a?(String)
+          arg = connection.relvar(arg) if arg.is_a?(String)
           Algebra::Operand.coerce(arg)
         }
+        operands
       end
 
       def stdin_operand
