@@ -9,8 +9,8 @@ module Alf
       # Called by Quickl when it's time to generate documentation of `cmd`.
       #
       def call(cmd, options = {})
-        if File.exists?(file = find_file(cmd))
-          text = File.read(file)
+        if (file = find_file(cmd)).file?
+          text = file.read
 
           # Replace occurences of #{signature} to #{signature.to_xxx}
           # according to options
@@ -54,7 +54,7 @@ module Alf
         argv = Quickl.split_commandline_args(argv, '|')
         argv.inject(nil) do |cmd,arr|
           arr.shift if arr.first == "alf"
-          main = Alf::Shell::Main.new
+          main = Alf::Shell::Main.new(Alf::Shell::DEFAULT_CONFIG)
           main.config.adapter = Alf.examples_adapter
           main.stdin_operand = cmd unless cmd.nil?
           main.run(arr, requester)
@@ -76,7 +76,7 @@ module Alf
         else
           raise "Unexpected command #{cmd}"
         end
-        File.join(DOC_FOLDER, where, "#{cmd.command_name}.md")
+        DOC_FOLDER/where/"#{cmd.command_name}.md"
       end
 
     end # class DocManager

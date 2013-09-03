@@ -46,8 +46,8 @@ module Alf
       attr_accessor :stdin_operand
 
       # Creates a command instance
-      def initialize
-        @config = load_config
+      def initialize(config = load_config)
+        @config = config
       end
       attr_reader :config
 
@@ -104,6 +104,8 @@ module Alf
         end
 
         opt.on_tail('-h', "--help", "Show help") do
+          install_load_path
+          install_requires
           raise Quickl::Help
         end
 
