@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/alf-tool/alf-core.git
-  revision: fea46c27453e63b40bdea0dc46008453b763717e
+  revision: 7d71c2869582c826fd51c35439f3e0f92babe777
   specs:
     alf-core (0.14.0)
       domain (~> 1.0)
