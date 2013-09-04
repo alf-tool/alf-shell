@@ -12,7 +12,7 @@ module Alf
       describe "on a static file" do
         before{
           def dm.find_file(cmd);
-            File.expand_path('../static.md', __FILE__)
+            Path.dir/'static.md'
           end
         }
         it { should eq("Hello\n") }
@@ -21,21 +21,19 @@ module Alf
       describe "on a dynamic file" do
         before{
           def dm.find_file(cmd);
-            File.expand_path('../dynamic.md', __FILE__)
+            Path.dir/'dynamic.md'
           end
         }
         it { should eq("show\n") }
       end
 
-      unless RUBY_VERSION < "1.9"
-        describe "on an example file" do
-          before{
-            def dm.find_file(cmd);
-              File.expand_path('../example.md', __FILE__)
-            end
-          }
-          it { should eq(File.read(File.expand_path('../example_1.txt', __FILE__))) }
-        end
+      describe "on an example file" do
+        before{
+          def dm.find_file(cmd);
+            Path.dir/'example.md'
+          end
+        }
+        it { should eq((Path.dir/"example_1.txt").read) }
       end
 
     end
