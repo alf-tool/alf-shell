@@ -10,7 +10,7 @@ variables:
   upper:
     Shell
   version:
-    0.14.0
+    0.15.0
   summary:
     Bring Alf's relational algebra to the shell
   description: |-
@@ -21,10 +21,8 @@ variables:
     - http://github.com/alf-tool/alf-shell
     - http://github.com/alf-tool/alf
   dependencies:
-    - {name: alf-core,  version: "~> 0.14.0",  groups: [runtime]}
+    - {name: alf-core,  version: "~> 0.15.0",  groups: [runtime]}
     - {name: quickl,    version: "~> 0.4.3",   groups: [runtime]}
     - {name: rake,      version: "~> 10.1",    groups: [development]}
     - {name: rspec,     version: "~> 2.14",    groups: [development]}
     - {name: highline,  version: "~> 1.6",     groups: [extra]}
-
-    

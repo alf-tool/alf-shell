@@ -18,7 +18,7 @@ module Alf
 
       specify{
         subject.expr.should be_a(Predicate::Eq)
-        subject.expr.should eq([:eq, [:var_ref, :status], [:literal, 10]])
+        subject.expr.should eq([:eq, [:identifier, :status], [:literal, 10]])
       }
     end
 

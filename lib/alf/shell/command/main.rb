@@ -164,9 +164,7 @@ module Alf
         if @execute
           connection.query(argv.first)
         else
-          op = yield
-          op = op.bind(connection) if op
-          op
+          yield
         end
       end
 
