@@ -1,6 +1,8 @@
-# 0.14.0 / FIX ME
+# 0.14.0 / 2013-10-01
 
+* Added a .alfrc abstraction
 * Added documentation for `page` (follows alf-core changes)
+* Added documentation for `frame` (follows alf-core changes)
 
 # 0.13.1 / 2013-07-29
 
