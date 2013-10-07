@@ -50,9 +50,8 @@ RELATIONAL OPERATORS
 
 EXPERIMENTAL RELATIONAL OPERATORS
 
-    hierarchize       Relational hierarchy (recursive relation-trees)
-    infer-heading     Relational heading inference (print the relation type)
-    quota             Generalized quota-queries (position, sum progression, etc.)
+    hierarchize     Relational hierarchy (recursive relation-trees)
+    quota           Generalized quota-queries (position, sum progression, etc.)
 
 NON-RELATIONAL OPERATORS
 
@@ -63,7 +62,6 @@ NON-RELATIONAL OPERATORS
     defaults      Force default values on missing/nil attributes
     generator     Generate a relation with an auto-numbered attribute
     sort          Sort input tuples according to an order relation
-    type-safe     Check that input tuples are of a specified heading
 
 OTHER NON-RELATIONAL COMMANDS
 
