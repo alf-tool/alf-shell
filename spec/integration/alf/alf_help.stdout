@@ -29,6 +29,7 @@ OPTIONS
 
 RELATIONAL OPERATORS
 
+    allbut           Relational allbut projection (inverse of project)
     extend           Relational extension (additional, computed attributes)
     frame            Relational framing (aka offset/limit, yet sounder)
     group            Relational grouping (relation-valued attributes)
