@@ -9,7 +9,7 @@ module Alf
 
       specify{
         subject.expr.should be_a(Predicate::Native)
-        subject.to_ruby_literal.should eq("lambda{ status == 10 }")
+        subject.to_ruby_literal.should eq("->{ status == 10 }")
       }
     end
 

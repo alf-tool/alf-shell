@@ -21,7 +21,7 @@ module Alf::Shell::Operator
       let(:argv){ [ input ] + ["--", "status > 10"] }
       specify{
         subject.predicate.should be_a(Alf::Predicate)
-        subject.predicate.to_ruby_code.should eq("status > 10")
+        subject.predicate.to_ruby_code.should eq("->{ status > 10 }")
       }
     end
 
