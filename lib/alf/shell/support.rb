@@ -6,10 +6,6 @@ module Alf
         requester && requester.connection
       end
 
-      def compiler
-        @compiler ||= (connection && connection.compiler) || Engine::Compiler.new(nil)
-      end
-
       def operands(argv, size = nil)
         operands = [ stdin_operand ] + Array(argv)
         operands = operands[(operands.size - size)..-1] if size

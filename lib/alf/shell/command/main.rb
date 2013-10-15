@@ -134,7 +134,7 @@ module Alf
 
         # compile the operator, render and returns it
         compile(argv){ super }.tap do |op|
-          render(connection.compile(op)) if op && requester
+          render(connection.relvar(op)) if op && requester
         end
       end
 

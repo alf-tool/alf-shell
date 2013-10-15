@@ -1,6 +1,5 @@
-GIT
-  remote: git://github.com/alf-tool/alf-core.git
-  revision: f9cb047dd57ea61d121103f2c8ca7cdd73456d0a
+PATH
+  remote: ../alf-core
   specs:
     alf-core (0.15.0)
       domain (~> 1.0)
