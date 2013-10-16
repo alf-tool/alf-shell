@@ -11,7 +11,6 @@ SYNOPSIS
 
 OPTIONS
 
-    -e, --execute                    Execute one line of script (Lispy API)
     --rash                       Render output as ruby hashes
     --text                       Render output as a text table
     --yaml                       Render output in YAML
@@ -66,9 +65,10 @@ NON-RELATIONAL OPERATORS
 
 OTHER NON-RELATIONAL COMMANDS
 
-    exec     Executes an .alf file on current database
-    help     Show help about a specific command
-    show     Output input tuples through the default renderer in a specific order.
+    explain      Show the logical and physical plans of a query
+    help         Show help about a specific command
+    metadata     Show metadata for a query
+    show         Output input tuples through the default renderer in a specific order.
 
 See 'alf help COMMAND' for details about a specific command.
 

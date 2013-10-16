@@ -16,6 +16,7 @@ module Alf
   end # module Command
 end # module Alf
 require_relative 'command/main'
-require_relative 'command/exec'
 require_relative 'command/help'
 require_relative 'command/show'
+require_relative 'command/metadata'
+require_relative 'command/explain'

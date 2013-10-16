@@ -1,0 +1,11 @@
+Logical plan:
+
+  Alf::Relvar::Virtual ...
+  +-- restrict(..., ->(t){ t.sid == "S1" })
+     +-- suppliers
+
+Physical plan:
+
+  Filter ..., ->(t){ t.sid == "S1" }
+  +-- Leaf
+     +-- Alf::Reader::Rash(suppliers.rash)

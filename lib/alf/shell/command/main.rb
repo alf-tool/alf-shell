@@ -55,11 +55,6 @@ module Alf
       options do |opt|
         @rendering_options = {}
 
-        @execute = false
-        opt.on("-e", "--execute", "Execute one line of script (Lispy API)") do
-          @execute = true
-        end
-
         Renderer.each do |name,descr,clazz|
           opt.on("--#{name}", "Render output #{descr}"){
             config.default_renderer = clazz
@@ -127,13 +122,8 @@ module Alf
         install_load_path
         install_requires
 
-        # special case where a .alf file is provided
-        if argv.empty? or (argv.size == 1 && Path(argv.first).file?)
-          argv.unshift("exec")
-        end
-
         # compile the operator, render and returns it
-        compile(argv){ super }.tap do |op|
+        super.tap do |op|
           render(connection.relvar(op)) if op && requester
         end
       end
@@ -158,14 +148,6 @@ module Alf
           config.alfrc(alfrc_file)
         end
         config
-      end
-
-      def compile(argv)
-        if @execute
-          connection.query(argv.first)
-        else
-          yield
-        end
       end
 
       def rendering_options
