@@ -11,6 +11,9 @@ module Alf
       # Default renderer to use for outputting relations
       option :default_renderer, Class, ->{ $stdout.tty? ? Renderer::Text : Renderer::Rash }
 
+      # Default reader name to use for reading on stdin
+      option :stdin_reader, Symbol, :rash
+
       # Float format to use
       option :float_format, String, "%.3f"
 

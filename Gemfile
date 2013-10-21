@@ -3,7 +3,8 @@ source 'http://rubygems.org'
 group :runtime do
   gem "quickl",   "~> 0.4.3"
 
-  gem "alf-core", path: "../alf-core"
+  gem "alf-shell", path: "."
+  gem "alf-core",  path: "../alf-core"
 end
 
 group :development do

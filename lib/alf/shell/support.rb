@@ -2,22 +2,23 @@ module Alf
   module Shell
     module Support
 
+      AlfFile = ->(arg){
+        path = Path(arg)
+        path.file? and path.ext =~ /^\.?alf$/
+      }
+
       def connection
         requester && requester.connection
       end
 
-      def operands(argv, size = nil)
-        operands = [ stdin_operand ] + Array(argv)
-        operands = operands[(operands.size - size)..-1] if size
-        operands = operands.map{|arg|
-          arg = connection.relvar(arg) if arg.is_a?(String)
+      def operand(arg)
+        case arg
+        when AlfFile then operand(Path(arg).read)
+        when String  then connection.relvar(arg)
+        when Array   then operand(arg.first)
+        else
           Algebra::Operand.coerce(arg)
-        }
-        operands
-      end
-
-      def stdin_operand
-        requester.stdin_operand rescue $stdin
+        end
       end
 
     end # module Support

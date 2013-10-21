@@ -1,12 +1,12 @@
-
-Output input tuples through the default renderer in a specific order.
+Evaluates a query and shows the result.
 
 SYNOPSIS
 
-    alf show NAME -- [ORDERING]
+    alf #(command_name) QUERY -- [ORDERING]
 
 DESCRIPTION
 
-When a name is specified as commandline arg, request the database to
-provide the corresponding relation variable and prints its value.
-Otherwise, take what comes on standard input.
+Take a query argument and execute it against the current database. Show the
+result on standard output. When an ordering is specified, tuples are rendered
+in the order specified.
+

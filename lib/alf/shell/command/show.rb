@@ -1,6 +1,18 @@
 module Alf
   module Shell
-    class Show < Shell::Command()
+    # Evaluates a query and shows the result.
+    # 
+    # SYNOPSIS
+    # 
+    #     alf #(command_name) QUERY -- [ORDERING]
+    # 
+    # DESCRIPTION
+    # 
+    # Take a query argument and execute it against the current database. Show the
+    # result on standard output. When an ordering is specified, tuples are rendered
+    # in the order specified.
+    #
+    class Show < Shell::Command(__FILE__, __LINE__)
 
       def run(argv, requester)
         # set requester and parse options
@@ -11,11 +23,15 @@ module Alf
       end
 
       def compile(argv)
-        operand = operands(argv.shift, 1).last
-        unless argv.empty?
-          operand = Algebra::Sort.new([operand], Shell.from_argv(argv.first, Ordering))
-        end
+        operand = operand(argv.shift)
+        operand = sort(operand, argv.first) unless argv.empty?
         operand
+      end
+
+    private
+
+      def sort(operand, ordering)
+        Algebra::Sort.new([operand], Ordering.coerce(ordering))
       end
 
     end # class Show

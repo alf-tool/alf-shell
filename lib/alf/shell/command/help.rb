@@ -1,27 +1,27 @@
 module Alf
   module Shell
-    class Help < Shell::Command()
+    # 
+    # Shows help about a specific command or relational operator
+    # 
+    # SYNOPSIS
+    # 
+    #     alf help ARG
+    # 
+    # DESCRIPTION
+    # 
+    # Take the name of a command or of a relational operators and show its
+    # documentation.
+    # 
+    class Help < Shell::Command(__FILE__, __LINE__)
       
       # Let NoSuchCommandError be passed to higher stage
       no_react_to Quickl::NoSuchCommand
       
-      options do |opt|
-        @dialect = :shell
-        opt.on('--lispy', 
-               'Display operator signatures in lispy DSL') do
-          @dialect = :lispy
-        end
-        opt.on('--shell', 
-               'Display operator signatures in shell DSL') do
-          @dialect = :shell
-        end
-      end
-
       # Command execution
       def execute(args)
         sup = Quickl.super_command(self)
         sub = (args.size != 1) ? sup : Quickl.sub_command!(sup, args.first)
-        doc = sub.documentation(:method => @dialect)
+        doc = sub.documentation
         puts doc
       end
       

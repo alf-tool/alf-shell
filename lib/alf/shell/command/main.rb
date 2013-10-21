@@ -1,49 +1,26 @@
 module Alf
   module Shell
-    class Main < Shell::Delegator()
-
-      class << self
-
-        def relational_operators(sort_by_name = true)
-          ops = subcommands.select{|cmd|
-             cmd.operator? and cmd.relational? and !cmd.experimental?
-          }
-          sort_operators(ops, sort_by_name)
-        end
-
-        def experimental_operators(sort_by_name = true)
-          ops = subcommands.select{|cmd|
-            cmd.operator? and cmd.relational? and cmd.experimental?
-          }
-          sort_operators(ops, sort_by_name)
-        end
-
-        def non_relational_operators(sort_by_name = true)
-          ops = subcommands.select{|cmd|
-            cmd.operator? and !cmd.relational?
-          }
-          sort_operators(ops, sort_by_name)
-        end
-
-        def other_non_relational_commands(sort_by_name = true)
-          ops = subcommands.select{|cmd|
-            cmd.command?
-          }
-          sort_operators(ops, sort_by_name)
-        end
-
-        private
-
-        def sort_operators(ops, sort_by_name)
-          sort_by_name ? ops.sort{|op1,op2|
-            op1.command_name.to_s <=> op2.command_name.to_s
-          } : ops
-        end
-
-      end # class << self
-
-      # The reader to use when stdin is used as operand
-      attr_accessor :stdin_operand
+    # alf - Relational algebra at your fingertips
+    # 
+    # SYNOPSIS
+    # 
+    #     alf [--version] [--help]
+    #     alf [FILE.alf]
+    #     alf [alf opts] OPERATOR [operator opts] ARGS ...
+    #     alf help OPERATOR
+    # 
+    # OPTIONS
+    # 
+    # #{summarized_options}
+    # 
+    # COMMANDS
+    #
+    # #{summarized_subcommands}
+    # 
+    # See 'alf help COMMAND' for details about a specific command.
+    # See 'alf help OPERATOR' for documentation of a relational operator.
+    #
+    class Main < Quickl::Delegator(__FILE__, __LINE__)
 
       # Creates a command instance
       def initialize(config = load_config)
@@ -70,12 +47,11 @@ module Alf
           config.adapter = value
         end
 
-        @input_reader = :rash
-        readers = Reader.all.map{|r| r.first}
-        opt.on('--input-reader=READER', readers,
-               "Specify the kind of reader when reading on $stdin "\
+        readers = Reader.all.map{|r| r.first }
+        opt.on('--stdin=READER', readers,
+               "Specify the kind of reader when reading on standard input "\
                "(#{readers.join(',')})") do |value|
-          @input_reader = value.to_sym
+          config.stdin_reader = value.to_sym
         end
 
         opt.on("-Idirectory",
@@ -110,12 +86,8 @@ module Alf
         end
       end # Alf's options
 
-      def stdin_operand
-        @stdin_operand || Reader.send(@input_reader, $stdin)
-      end
-
       def connection
-        @connection ||= config.database.connection(viewpoint: config.viewpoint)
+        @connection ||= config.database.connection(viewpoint: build_viewpoint)
       end
 
       def execute(argv)
@@ -148,6 +120,17 @@ module Alf
           config.alfrc(alfrc_file)
         end
         config
+      end
+
+      def build_viewpoint
+        config = self.config
+        Module.new{
+          include Alf::Viewpoint
+          include config.viewpoint
+          def stdin
+            Algebra::Operand.coerce Reader.send(contextual_params[:reader], $stdin)
+          end
+        }[reader: config.stdin_reader]
       end
 
       def rendering_options

@@ -1,4 +1,11 @@
 PATH
+  remote: .
+  specs:
+    alf-shell (0.15.0)
+      alf-core (~> 0.15.0)
+      quickl (~> 0.4.3)
+
+PATH
   remote: ../alf-core
   specs:
     alf-core (0.15.0)
@@ -33,6 +40,7 @@ PLATFORMS
 
 DEPENDENCIES
   alf-core!
+  alf-shell!
   highline (~> 1.6)
   quickl (~> 0.4.3)
   rake (~> 10.1)

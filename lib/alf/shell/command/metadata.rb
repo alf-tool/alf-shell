@@ -1,6 +1,17 @@
 module Alf
   module Shell
-    class Metadata < Shell::Command()
+    # Show metadata for a query
+    # 
+    # SYNOPSIS
+    # 
+    #     alf metadata QUERY
+    # 
+    # DESCRIPTION
+    # 
+    # This command prints some metadata (e.g. heading, keys, etc.) about the
+    # expression passed as first argument.
+    #
+    class Metadata < Shell::Command(__FILE__, __LINE__)
 
       def run(argv, requester)
         # set requester and parse options
@@ -16,7 +27,7 @@ module Alf
       end
 
       def compile(argv)
-        operands(argv.shift, 1).last
+        operand(argv.shift)
       end
 
     end # class Metadata
