@@ -5,6 +5,7 @@ group :runtime do
 
   gem "alf-shell", path: "."
   gem "alf-core",  path: "../alf-core"
+  gem "alf-doc",   path: "../alf-doc"
 end
 
 group :development do

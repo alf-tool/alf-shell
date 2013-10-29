@@ -1,0 +1,28 @@
+# Project
+
+Keeps only a subset of attributes.
+
+## Signature
+
+project(operand: Relation, attributes: AttrList) -> Relation
+
+## Examples
+
+project(suppliers, [:city])
+
+project(suppliers, [:city], allbut: true)
+
+## Description
+
+Computes the relation obtained by projecting tuples from `operand` on a
+subset of their attributes.
+
+This operator supports an ALL BUT variant, through the `allbut` option.
+When set to true, the operator _removes_ specified attributes instead of
+keeping them. An `allbut` operator is also provided that has the same
+effect.
+
+## Implementation notes
+
+Unlike SQL, this operator ALWAYS remove duplicates. There is no way, in
+Alf, to compute _bags_ of tuples.

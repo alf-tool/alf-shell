@@ -8,6 +8,13 @@ GIT
       path (~> 1.3)
       sexpr (~> 0.6.0)
 
+GIT
+  remote: git://github.com/alf-tool/alf-doc.git
+  revision: 5babcbf82310b26ab5fa2ae610cf2c5f4ba9a674
+  specs:
+    alf-doc (0.15.0)
+      alf-core (~> 0.15.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -34,6 +41,7 @@ PLATFORMS
 
 DEPENDENCIES
   alf-core!
+  alf-doc!
   highline (~> 1.6)
   quickl (~> 0.4.3)
   rake (~> 10.1)

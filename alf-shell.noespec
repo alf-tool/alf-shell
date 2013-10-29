@@ -22,6 +22,7 @@ variables:
     - http://github.com/alf-tool/alf
   dependencies:
     - {name: alf-core,  version: "~> 0.15.0",  groups: [runtime]}
+    - {name: alf-doc,   version: "~> 0.15.0",   groups: [runtime]}
     - {name: quickl,    version: "~> 0.4.3",   groups: [runtime]}
     - {name: rake,      version: "~> 10.1",    groups: [development]}
     - {name: rspec,     version: "~> 2.14",    groups: [development]}
