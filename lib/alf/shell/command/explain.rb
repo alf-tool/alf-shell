@@ -1,19 +1,14 @@
 module Alf
   module Shell
-    # Show the logical and physical plans of a query
-    # 
-    # SYNOPSIS
-    # 
-    #     alf explain QUERY
-    # 
-    # DESCRIPTION
-    # 
-    # This command prints the logical and physical query plans for QUERY to
-    # standard output. The logical plan is post-optimizer and allows checking that
-    # the latter performs correctly. The physical plan provides information about
-    # delegation to underlying database engines, e.g. involved SQL queries.
-    #
     class Explain < Shell::Command(__FILE__,__LINE__)
+
+      options do |opt|
+
+        opt.on_tail('-h', "--help", "Show help") do
+          show_help("alf-explain")
+        end
+
+      end
 
       def run(argv, requester)
         # set requester and parse options

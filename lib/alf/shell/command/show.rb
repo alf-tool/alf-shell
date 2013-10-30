@@ -1,18 +1,14 @@
 module Alf
   module Shell
-    # Evaluates a query and shows the result.
-    # 
-    # SYNOPSIS
-    # 
-    #     alf #(command_name) QUERY -- [ORDERING]
-    # 
-    # DESCRIPTION
-    # 
-    # Take a query argument and execute it against the current database. Show the
-    # result on standard output. When an ordering is specified, tuples are rendered
-    # in the order specified.
-    #
     class Show < Shell::Command(__FILE__, __LINE__)
+
+      options do |opt|
+
+        opt.on_tail('-h', "--help", "Show help") do
+          show_help("alf-show")
+        end
+
+      end
 
       def run(argv, requester)
         # set requester and parse options

@@ -1,17 +1,14 @@
 module Alf
   module Shell
-    # Show metadata for a query
-    # 
-    # SYNOPSIS
-    # 
-    #     alf metadata QUERY
-    # 
-    # DESCRIPTION
-    # 
-    # This command prints some metadata (e.g. heading, keys, etc.) about the
-    # expression passed as first argument.
-    #
     class Metadata < Shell::Command(__FILE__, __LINE__)
+
+      options do |opt|
+
+        opt.on_tail('-h', "--help", "Show help") do
+          show_help("alf-metadata")
+        end
+
+      end
 
       def run(argv, requester)
         # set requester and parse options

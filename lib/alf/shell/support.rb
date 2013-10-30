@@ -21,6 +21,17 @@ module Alf
         end
       end
 
+      def show_help(who)
+        who = "alf-#{who}" if /explain|metadata|show/ =~ who
+        if p = Path.backfind("doc/man/#{who}.man")
+          exit if system("man #{p}")
+          puts Path.backfind("doc/txt/#{who}.txt").read
+        else
+          puts "Unknown command/operator `#{who}`"
+        end
+        exit
+      end
+
     end # module Support
   end # module Shell
 end # module Alf

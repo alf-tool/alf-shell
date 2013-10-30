@@ -1,26 +1,7 @@
 module Alf
   module Shell
-    # alf - Relational algebra at your fingertips
-    # 
-    # SYNOPSIS
-    # 
-    #     alf [--version] [--help]
-    #     alf [FILE.alf]
-    #     alf [alf opts] OPERATOR [operator opts] ARGS ...
-    #     alf help OPERATOR
-    # 
-    # OPTIONS
-    # 
-    # #{summarized_options}
-    # 
-    # COMMANDS
-    #
-    # #{summarized_subcommands}
-    # 
-    # See 'alf help COMMAND' for details about a specific command.
-    # See 'alf help OPERATOR' for documentation of a relational operator.
-    #
     class Main < Quickl::Delegator(__FILE__, __LINE__)
+      include Support
 
       # Creates a command instance
       def initialize(config = load_config)
@@ -75,9 +56,7 @@ module Alf
         end
 
         opt.on_tail('-h', "--help", "Show help") do
-          install_load_path
-          install_requires
-          raise Quickl::Help
+          show_help("alf")
         end
 
         opt.on_tail('-v', "--version", "Show version") do
