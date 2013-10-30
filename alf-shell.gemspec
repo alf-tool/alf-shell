@@ -19,8 +19,8 @@ Gem::Specification.new do |s|
   s.executables = (Dir["bin/*"]).collect{|f| File.basename(f)}
   s.add_development_dependency("rake", "~> 10.1")
   s.add_development_dependency("rspec", "~> 2.14")
+  s.add_development_dependency("alf-doc", "~> 0.15.0")
   s.add_development_dependency("highline", "~> 1.6")
   s.add_dependency("alf-core", "~> 0.15.0")
-  s.add_dependency("alf-doc", "~> 0.15.0")
   s.add_dependency("quickl", "~> 0.4.3")
 end

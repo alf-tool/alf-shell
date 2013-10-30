@@ -5,10 +5,10 @@ group :runtime do
 
   gem "alf-shell", path: "."
   gem "alf-core",  path: "../alf-core"
-  gem "alf-doc",   path: "../alf-doc"
 end
 
 group :development do
+  gem "alf-doc",   path: "../alf-doc"
   gem "rake", "~> 10.1"
   gem "rspec", "~> 2.14"
 end

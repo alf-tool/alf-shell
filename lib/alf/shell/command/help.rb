@@ -31,14 +31,12 @@ module Alf
     private
 
       def op_documentation(name)
-        require 'alf-doc'
-        require 'alf/doc/to_markdown'
-        op = Alf::Doc.query{
-          restrict(operators, name: name)
-        }.tuple_extract
-        puts Alf::Doc::ToMarkdown.new.operator(op).gsub(/^```(try)?\n/, "")
-      rescue NoSuchTupleError
-        puts "No such operator `#{name}`"
+        if p = Path.backfind("doc/man/#{name}.man")
+          exit if system("man #{p}")
+          puts Path.backfind("doc/txt/#{name}.txt").read
+        else
+          puts "No such operator `#{name}`"
+        end
       end
 
     end # class Help
