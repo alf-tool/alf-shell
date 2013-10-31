@@ -114,7 +114,7 @@ module Alf
 
       def rendering_options
         options = { float_format: config.float_format }
-        if config.pretty? and (hl = highline)
+        if config.pretty? and (hl = highline) and (hl.output_cols)
           options[:pretty]  = config.pretty?
           options[:trim_at] = hl.output_cols - 1
         end
