@@ -3,3 +3,5 @@ coverage/*
 pkg
 .bundle
 doc
+Gemfile.lock
+Gemfile.ci.lock
