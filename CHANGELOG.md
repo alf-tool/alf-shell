@@ -1,3 +1,12 @@
+# 0.15.1 / FIX ME
+
+* Added highline '~> 1.6' to runtime dependencies.
+* Fixed --pretty behavior when stdout is a terminal.
+
+# 0.15.0 / 2013-11-01
+
+* Removed all commands corresponding to operators. Use ruby expressions instead.
+
 # 0.14.0 / 2013-10-01
 
 * Added a .alfrc abstraction

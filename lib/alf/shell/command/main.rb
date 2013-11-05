@@ -114,16 +114,20 @@ module Alf
 
       def rendering_options
         options = { float_format: config.float_format }
-        if config.pretty? and (hl = highline) and (hl.output_cols)
-          options[:pretty]  = config.pretty?
-          options[:trim_at] = hl.output_cols - 1
-        end
+        options[:pretty]  = config.pretty?
+        options[:trim_at] = trim_at if options[:pretty]
         options
       end
 
       def render(operator, out = $stdout)
         renderer = config.default_renderer.new(operator, rendering_options)
         renderer.execute(out)
+      end
+
+      def trim_at
+        return nil unless hl = highline
+        return nil unless cols = hl.output_cols
+        hl.output_cols - 1
       end
 
       def highline
