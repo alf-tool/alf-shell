@@ -24,7 +24,9 @@ module Alf
       end
 
       def compile(argv)
-        operand(argv.shift)
+        op = operand(argv.shift)
+        op.heading rescue op = op.to_relation
+        op
       end
 
     end # class Metadata

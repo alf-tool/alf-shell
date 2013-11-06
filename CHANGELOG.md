@@ -2,6 +2,8 @@
 
 * Added highline '~> 1.6' to runtime dependencies.
 * Fixed --pretty behavior when stdout is a terminal.
+* Fix `metadata` command when using input sources that do not provide heading
+  information (heading is infered through Relation coercion).
 
 # 0.15.0 / 2013-11-01
 
