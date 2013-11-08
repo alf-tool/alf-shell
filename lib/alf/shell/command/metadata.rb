@@ -25,7 +25,10 @@ module Alf
 
       def compile(argv)
         op = operand(argv.shift)
-        op.heading rescue op = op.to_relation
+        op.heading
+        op
+      rescue Alf::NotSupportedError
+        op = op.to_relation
         op
       end
 
