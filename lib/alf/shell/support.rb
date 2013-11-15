@@ -22,7 +22,7 @@ module Alf
       end
 
       def show_help(who)
-        who = "alf-#{who}" if /explain|metadata|show/ =~ who
+        who = "alf-#{who}" if /explain|metadata|show|repl/ =~ who
         if p = Path.backfind("doc/man/#{who}.man")
           exit if system("man #{p}")
           puts Path.backfind("doc/txt/#{who}.txt").read
