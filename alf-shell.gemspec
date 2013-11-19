@@ -15,8 +15,11 @@ Gem::Specification.new do |s|
   s.files = File.readlines(File.join(here, 'Manifest.txt')).
                  inject([]){|files, pattern| files + Dir[File.join(here, pattern.strip)]}.
                  collect{|x| x[(1+here.size)..-1]}
+
   s.bindir = "bin"
-  s.executables = (Dir["bin/*"]).collect{|f| File.basename(f)}
+  s.executables = (Dir["bin/*"]).map{|f| File.basename(f)}
+
+
   s.add_development_dependency("rake", "~> 10.1")
   s.add_development_dependency("rspec", "~> 2.14")
   s.add_development_dependency("alf-doc", "~> 0.15.0")

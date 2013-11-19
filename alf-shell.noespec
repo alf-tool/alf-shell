@@ -2,7 +2,11 @@ template-info:
   name: alf.noe
   version: 0.2.0
   manifest:
+    lib/alf/__lower__/loader.rb:
+      safe-override: false
     Gemfile:
+      safe-override: false
+    Gemfile.ci:
       safe-override: false
 variables:
   lower:
@@ -10,20 +14,23 @@ variables:
   upper:
     Shell
   version:
-    0.15.1
+    0.16.0
   summary:
     Bring Alf's relational algebra to the shell
   description: |-
     This project implements the `alf` commandline tool.
+  has_bin:
+    true
   authors:
     - {name: Bernard Lambeau, email: blambeau at gmail.com}
   links:
     - http://github.com/alf-tool/alf-shell
     - http://github.com/alf-tool/alf
   dependencies:
-    - {name: alf-core,  version: "~> 0.15.1",  groups: [runtime]}
     - {name: quickl,    version: "~> 0.4.3",   groups: [runtime]}
     - {name: highline,  version: "~> 1.6",     groups: [runtime]}
     - {name: rake,      version: "~> 10.1",    groups: [development]}
     - {name: rspec,     version: "~> 2.14",    groups: [development]}
-    - {name: alf-doc,   version: "~> 0.15.0",  groups: [development]}
+  depends:
+    - {name: alf-core, groups: [runtime]}
+    - {name: alf-doc,  groups: [development]}
