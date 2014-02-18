@@ -4,6 +4,7 @@
 * Fixed --pretty behavior when stdout is a terminal.
 * Fix `metadata` command when using input sources that do not provide heading
   information (heading is infered through Relation coercion).
+* Take 'alfrc' into account too (without the dot, for WIN32 users)
 
 # 0.15.0 / 2013-11-01
 

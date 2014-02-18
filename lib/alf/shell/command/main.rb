@@ -95,7 +95,7 @@ module Alf
 
       def load_config
         config = Alf::Shell::DEFAULT_CONFIG.dup
-        if alfrc_file = Path.pwd.backfind('.alfrc')
+        if alfrc_file = Path.pwd.backfind('.alfrc') || Path.pwd.backfind('alfrc')
           config.alfrc(alfrc_file)
         end
         config
