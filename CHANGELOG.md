@@ -1,4 +1,4 @@
-# 0.15.1 / FIX ME
+# 0.16.0 / FIX ME
 
 * Added highline '~> 1.6' to runtime dependencies.
 * Fixed --pretty behavior when stdout is a terminal.
