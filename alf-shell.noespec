@@ -14,7 +14,7 @@ variables:
   upper:
     Shell
   version:
-    0.16.3
+    0.17.0
   summary:
     Bring Alf's relational algebra to the shell
   description: |-
