@@ -1,3 +1,7 @@
+# 0.16.4 - 2014-09-12
+
+* Fix missing .txt files for help to work properly when `man` is unavailable.
+
 # 0.16.3 - 2014-07-25
 
 * No change in this submodule.
